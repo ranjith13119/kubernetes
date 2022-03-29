@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Node
+metadata:
+  name: myapp-node
+  labels:
+    name: myapp
+spec:
+  taints:
+  - effect: app
+    key: cap 
+
+

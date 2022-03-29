@@ -1,0 +1,18 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: simple-cron-job
+spec:
+  schedule: "30 21 * * *"
+  jobTemplate:
+    spec:
+      completions: 3
+      backoffLimit: 4
+      parallelism: 2
+      template:
+        spec:
+          containers:
+          - name: random-math
+            image: ubuntu
+            command: ["expr",  "3", "+", "1"]
+          restartPolicy: Never

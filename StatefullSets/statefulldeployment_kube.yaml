@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  serviceName: mysql-h  # service name of a headless service
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql
+        volumeMounts:
+        - name: data-volumne  # volumeClaimTemplates.metadata.name
+          mountPath: /var/lib/mysql
+  volumeClaimTemplates:   # this will create a new or seperate PV, PVC for each stateful pods
+  - metadata:
+      name: data-volumne
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "standard"
+      resources:
+        requests:
+          storage: 500Mi

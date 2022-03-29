@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: random-math-job
+spec:
+  completions: 3
+  parallelism: 2
+  backoffLimit: 4
+  template:
+    spec:
+      containers:
+      - name: random-math
+        image: ubuntu
+        command: ["expr",  "3", "+", "1"]
+      restartPolicy: Never
+      

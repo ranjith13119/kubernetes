@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-config
+  labels:
+    group: mock
+data:
+  APP_NAME: "my-mock"
+  APP_PORT: "8080"
+  APP_PATH: "/api"
